@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<h1 class="text-center mt-5" id="blogdetailtitle">{{ detailblog.title }}</h1>
+<h5>--{{ detailblog.date|date:'F jS Y' }}--</h5>
+{{ detailblog.description|safe}}
+
+
+{% endblock %}

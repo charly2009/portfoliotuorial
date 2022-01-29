@@ -1,0 +1,19 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{% load static %}
+<h1 id="blogtitle" class="font-weight-bold text-center">Blog</h1>
+<h3 class="text-center mb-5">Dosso has written {{ blogdata.count }} Blog{{ blogdata.count|pluralize }}</h3>
+{% for data in blogdata %}
+<div class="row justify-content-center my-3">
+    <div class="col-md-10">
+<a href="{% url 'blog:detail' data.id %}" target="_blank" rel="noopener noreferrer"><h2>{{ data.title }}</h2></a>
+{{ data.title }}
+<h4>{{ data.description|truncatechars:100 }}</h4> <!--truncate serve a troncare un testo lungo o usare {{ data.summary }} -->
+<h5>{{ data.smartdate }}</h5><!--questa e una funzione creata nel model.py  o usare {{ data.date|date:'M d Y' }} -->
+
+</div>
+</div>
+{% endfor %}
+
+{% endblock%}
