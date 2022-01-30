@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,13 +25,14 @@ SECRET_KEY = 'django-insecure-o#m_x3gxilr$o0o#5#p$h(*c%cv$a(avh@qm)i!7)u79nn=e-h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['http://127.0.0.1/l ','portfeuille.herokuapp.com/']
+ALLOWED_HOSTS = ['127.0.0.1','portfeuille.herokuapp.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'whitenoise.runserver_nostatic',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -83,6 +84,8 @@ DATABASES = {
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -121,7 +124,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_ROOT = BASE_DIR / 'media' # media root the folder where the image will be saved
 MEDIA_URL = '/media/' # the url where we can get ours images
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
